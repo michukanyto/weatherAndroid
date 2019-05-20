@@ -28,4 +28,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void searchCityMeteo(){
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                
+            }
+        });
+    }
 }
