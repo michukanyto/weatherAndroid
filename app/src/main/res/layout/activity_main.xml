@@ -93,7 +93,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/farenheitButton"
+        android:id="@+id/fahrenheitButton"
         android:layout_width="47dp"
         android:layout_height="53dp"
         android:layout_marginTop="25dp"
@@ -107,7 +107,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/celciusButton"
+        android:id="@+id/celsiusButton"
         android:layout_width="47dp"
         android:layout_height="53dp"
         android:layout_marginStart="248dp"
@@ -118,7 +118,7 @@
         android:textAlignment="center"
         android:textColor="@android:color/background_light"
         android:textSize="30sp"
-        app:layout_constraintEnd_toStartOf="@+id/farenheitButton"
+        app:layout_constraintEnd_toStartOf="@+id/fahrenheitButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

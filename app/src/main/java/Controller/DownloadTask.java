@@ -2,6 +2,7 @@ package Controller;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,6 +13,27 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class DownloadTask extends AsyncTask<String,Void,String> {
+    public Double temperature;
+    public Double maximal;
+    public Double minimal;
+    public int humidity;
+
+    public Double getTemperature() {
+        return temperature;
+    }
+
+    public Double getMaximal() {
+        return maximal;
+    }
+
+    public Double getMinimal() {
+        return minimal;
+    }
+
+    public int getHumidity() {
+        return humidity;
+    }
+
     @Override
     protected String doInBackground(String... urls) {
         String result = "";
@@ -47,19 +69,20 @@ public class DownloadTask extends AsyncTask<String,Void,String> {
         try {
             JSONObject jsonObject = new JSONObject(s);
 
-            String weatherInfo = jsonObject.getString("weather");
+            String weatherInfo = jsonObject.getString("main");
 
             Log.i("Weather content", weatherInfo);
+            JSONObject jsonObject1 = new JSONObject(weatherInfo);
 
-            JSONArray arr = new JSONArray(weatherInfo);
-            Log.i("Step------>","Inside onPostExecute");
+            temperature = (Double) jsonObject1.getDouble("temp");
+            Log.i("temperture======", temperature.toString());
+            minimal = (Double) jsonObject1.getDouble("temp_min");
+            Log.i("Minimal======", minimal.toString());
+            maximal = (Double) jsonObject1.getDouble("temp_max");
+            Log.i("Maximal======", maximal.toString());
+            humidity = (int) jsonObject1.getInt("humidity");
+            Log.i("humidity======", String.valueOf(humidity));
 
-            for (int i=0; i < arr.length(); i++) {
-                JSONObject jsonPart = arr.getJSONObject(i);
-
-                Log.i("main------>",jsonPart.getString("main"));
-                Log.i("description---->",jsonPart.getString("description"));
-            }
 
         } catch (Exception e) {
             e.printStackTrace();

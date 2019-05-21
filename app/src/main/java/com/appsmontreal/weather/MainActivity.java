@@ -4,20 +4,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import Controller.DownloadTask;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String APIKEY = "&APPID=928f54db8907a508f46ec83ac76094df";
     private static final String URLSTRING = "http://api.openweathermap.org/data/2.5/weather?q=";
-    Button searchButton;
-    Button exitButton;
     Button []buttons = new Button[4];
-    int []widgets = {R.id.searchButton,R.id.celciusButton,R.id.farenheitButton,R.id.exitButton};
+    int []widgets = {R.id.searchButton,R.id.celsiusButton,R.id.fahrenheitButton,R.id.exitButton};
     EditText cityEditText;
     DownloadTask task;
+    String encodeCityName;
+
 
 
     @Override
@@ -33,23 +37,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             buttons[b].setOnClickListener(this);
         }
         cityEditText = findViewById(R.id.cityEditText);
-        task = new DownloadTask();
     }
 
 
     public void findCityWeather(){
-        Log.i("Step------>","findCityWeather");
-        task.execute(URLSTRING + cityEditText.getText().toString() + APIKEY);
-
+        try {
+            task = new DownloadTask();
+            encodeCityName = URLEncoder.encode(cityEditText.getText().toString(), "UTF-8");
+            Log.i("Step------>", "findCityWeather");
+            task.execute(URLSTRING + encodeCityName + APIKEY);
+            InputMethodManager mgr = (InputMethodManager) getSystemService(getApplicationContext().INPUT_METHOD_SERVICE);
+            mgr.hideSoftInputFromWindow(cityEditText.getWindowToken(), 0);//hide automatically keyboard to see all content
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.celciusButton:
-
+            case R.id.celsiusButton:
+                convertToCelsius();
                 break;
 
-            case R.id.farenheitButton:
+            case R.id.fahrenheitButton:
+                convertToFahrenheit();
                 break;
 
             case R.id.searchButton:
@@ -60,5 +71,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
         }
+    }
+
+    private void convertToFahrenheit() {
+    }
+
+    private void convertToCelsius() {
     }
 }
