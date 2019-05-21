@@ -11,6 +11,8 @@ import Controller.DownloadTask;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button searchButton;
     Button exitButton;
+    Button []buttons = new Button[4];
+    int []widgets = {R.id.searchButton,R.id.celciusButton,R.id.farenheitButton,R.id.exitButton};
     Button celciusButton;
     Button farenheitButton;
     EditText cityEditText;
@@ -26,8 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initialize() {
-        searchButton = findViewById(R.id.searchButton);
-        exitButton = findViewById(R.id.exitButton);
+        for(int b = 0 ; b < buttons.length; b++){
+            buttons[b] = findViewById(widgets[b]);
+            buttons[b].setOnClickListener(this);
+        }
         cityEditText = findViewById(R.id.editTextCity);
         task = new DownloadTask();
     }
@@ -42,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void findCityWeather(){
-        task.execute("http://openweathermap.org/data/2.5/weather?q=" + cityEditText.getText().toString() +"&appid=b1b15e88fa797225412429c1c50c122a1");
+        task.execute("http://openweathermap.org/data/2.5/weather?q=" + buttons[0].getText().toString() +"&appid=b1b15e88fa797225412429c1c50c122a1");
     }
 
     @Override
