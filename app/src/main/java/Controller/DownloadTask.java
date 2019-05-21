@@ -52,12 +52,13 @@ public class DownloadTask extends AsyncTask<String,Void,String> {
             Log.i("Weather content", weatherInfo);
 
             JSONArray arr = new JSONArray(weatherInfo);
+            Log.i("Step------>","Inside onPostExecute");
 
             for (int i=0; i < arr.length(); i++) {
                 JSONObject jsonPart = arr.getJSONObject(i);
 
-                Log.i("main",jsonPart.getString("main"));
-                Log.i("description",jsonPart.getString("description"));
+                Log.i("main------>",jsonPart.getString("main"));
+                Log.i("description---->",jsonPart.getString("description"));
             }
 
         } catch (Exception e) {
