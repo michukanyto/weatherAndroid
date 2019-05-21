@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/weatherbkg"
     android:saveEnabled="false"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView7"
@@ -21,7 +21,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/textView9"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
 
     <TextView
         android:id="@+id/minTextView"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/buttonSearch"
+        android:id="@+id/searchButton"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_marginStart="100dp"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextCity" />
 
     <Button
-        android:id="@+id/buttonExit"
+        android:id="@+id/exitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="306dp"
@@ -165,7 +165,7 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView9"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/searchButton" />
 
     <TextView
         android:id="@+id/maxTextView"
@@ -197,6 +197,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonSearch"
+        app:layout_constraintTop_toBottomOf="@+id/searchButton"
         app:layout_constraintVertical_bias="0.0" />
 </android.support.constraint.ConstraintLayout>

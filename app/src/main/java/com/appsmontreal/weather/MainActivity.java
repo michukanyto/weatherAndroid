@@ -4,12 +4,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import Controller.DownloadTask;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button searchButton;
     Button exitButton;
+    Button celciusButton;
+    Button farenheitButton;
+    EditText cityEditText;
+
     DownloadTask task;
 
 
@@ -21,8 +26,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initialize() {
-        searchButton = findViewById(R.id.buttonSearch);
-        exitButton = findViewById(R.id.buttonExit);
+        searchButton = findViewById(R.id.searchButton);
+        exitButton = findViewById(R.id.exitButton);
+        cityEditText = findViewById(R.id.editTextCity);
         task = new DownloadTask();
     }
 
@@ -35,13 +41,27 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void searchCityMeteo(){
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                task.execute("http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b1b15e88fa797225412429c1c50c122a1");
+    public void findCityWeather(){
+        task.execute("http://openweathermap.org/data/2.5/weather?q=" + cityEditText.getText().toString() +"&appid=b1b15e88fa797225412429c1c50c122a1");
+    }
 
-            }
-        });
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.celciusButton:
+
+                break;
+
+            case R.id.farenheitButton:
+                break;
+
+            case R.id.searchButton:
+                findCityWeather();
+                break;
+
+            case R.id.exitButton:
+                finish();
+                break;
+        }
     }
 }
