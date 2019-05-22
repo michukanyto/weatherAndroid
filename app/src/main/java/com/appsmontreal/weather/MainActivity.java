@@ -90,9 +90,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //    ° F = 9/5 (K - 273) + 32
     private void convertToFahrenheit() {
-        String tempFahrenheit = String.format("%.1f", ((task.getTemperature() - 273) * (9/5)) + 32);
-        String minFahrenheit = String.format("%.1f", ((task.getMinimal() - 273) * (9/5)) + 32);
-        String maxFahrenheit = String.format("%.1f", ((task.getMaximal() - 273) * (9/5)) + 32);
+        String tempFahrenheit = String.format("%.1f", ((task.getTemperature() - 273.15) * (1.8) + 32));
+        String minFahrenheit = String.format("%.1f", (task.getMinimal() - 273.15) * (1.8) + 32);
+        String maxFahrenheit = String.format("%.1f", (task.getMaximal() - 273.15) * (1.8) + 32);
         setAndPrintResult(tempFahrenheit,minFahrenheit,maxFahrenheit);
         buttons[2].setTextColor(Color.WHITE);
         buttons[1].setTextColor(Color.BLACK);
