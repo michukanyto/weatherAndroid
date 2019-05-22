@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }catch (Exception e){
             e.printStackTrace();
         }
-
+//        convertToCelsius();
     }
 
 
@@ -86,10 +86,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+
+//    ° F = 9/5 (K - 273) + 32
     private void convertToFahrenheit() {
-        String tempFahrenheit = String.valueOf((task.getTemperature() * (9/5))- 459.67);
-        String minFahrenheit = String.valueOf((task.getMinimal() * (9/5))- 459.67);
-        String maxFahrenheit = String.valueOf((task.getMaximal() * (9/5))- 459.67);
+        String tempFahrenheit = String.valueOf(((9/5) * (task.getTemperature() - 273)) + 32);
+        String minFahrenheit = String.valueOf(((9/5) * (task.getMinimal() - 273)) + 32);
+        String maxFahrenheit = String.valueOf(((9/5) * (task.getMaximal() - 273)) + 32);
         setAndPrintResult(tempFahrenheit,minFahrenheit,maxFahrenheit);
     }
 
@@ -101,9 +103,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setAndPrintResult(String temp, String min, String max) {
-        temperatureTextView.setText(temp);
-        minTextView.setText(min);
-        maxTextView.setText(max);
+        temperatureTextView.setText(String.format("%.1f",temp));
+        minTextView.setText(String.format("%.1f",min));
+        maxTextView.setText(String.format("%.1f",max));
+        humidityTextView.setText(String.valueOf(task.getHumidity()));
 
     }
 }
