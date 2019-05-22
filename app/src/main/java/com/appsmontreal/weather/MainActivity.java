@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -19,6 +20,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button []buttons = new Button[4];
     int []widgets = {R.id.searchButton,R.id.celsiusButton,R.id.fahrenheitButton,R.id.exitButton};
     EditText cityEditText;
+    TextView temperatureTextView;
+    TextView minTextView;
+    TextView maxTextView;
+    TextView humidityTextView;
     DownloadTask task;
     String encodeCityName;
 
@@ -37,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             buttons[b].setOnClickListener(this);
         }
         cityEditText = findViewById(R.id.cityEditText);
+        temperatureTextView = findViewById(R.id.temTextView);
+        minTextView = findViewById(R.id.minTextView);
+        maxTextView = findViewById(R.id.maxTextView);
+        humidityTextView = findViewById(R.id.humidityTextView);
     }
 
 
@@ -51,7 +60,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }catch (Exception e){
             e.printStackTrace();
         }
+
     }
+
+
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -65,6 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.searchButton:
                 findCityWeather();
+//                convertToCelsius();
                 break;
 
             case R.id.exitButton:
@@ -74,8 +87,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void convertToFahrenheit() {
+        String tempFahrenheit = String.valueOf((task.getTemperature() * (9/5))- 459.67);
+        String minFahrenheit = String.valueOf((task.getMinimal() * (9/5))- 459.67);
+        String maxFahrenheit = String.valueOf((task.getMaximal() * (9/5))- 459.67);
+        setAndPrintResult(tempFahrenheit,minFahrenheit,maxFahrenheit);
     }
 
     private void convertToCelsius() {
+        String tempCelsius = String.valueOf(task.getTemperature() - 273.15);
+        String minCelsius = String.valueOf(task.getMinimal() - 273.15);
+        String maxCelsius = String.valueOf(task.getMaximal() - 273.15);
+        setAndPrintResult(tempCelsius,minCelsius,maxCelsius);
+    }
+
+    private void setAndPrintResult(String temp, String min, String max) {
+        temperatureTextView.setText(temp);
+        minTextView.setText(min);
+        maxTextView.setText(max);
+
     }
 }
