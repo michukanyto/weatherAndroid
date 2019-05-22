@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void findCityWeather(){
         try {
-            task = new DownloadTask();
+            task = new DownloadTask(this);
             encodeCityName = URLEncoder.encode(cityEditText.getText().toString(), "UTF-8");
             Log.i("Step------>", "findCityWeather");
             task.execute(URLSTRING + encodeCityName + APIKEY);
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }catch (Exception e){
             e.printStackTrace();
         }
-//        convertToCelsius();
+
     }
 
 
@@ -88,8 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-//    ° F = 9/5 (K - 273) + 32
-    private void convertToFahrenheit() {
+    public void convertToFahrenheit() {
         String tempFahrenheit = String.format("%.1f", ((task.getTemperature() - 273.15) * (1.8) + 32));
         String minFahrenheit = String.format("%.1f", (task.getMinimal() - 273.15) * (1.8) + 32);
         String maxFahrenheit = String.format("%.1f", (task.getMaximal() - 273.15) * (1.8) + 32);
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttons[1].setTextColor(Color.BLACK);
     }
 
-    private void convertToCelsius() {
+    public void convertToCelsius() {
         String tempCelsius = String.format("%.1f", task.getTemperature() - 273.15);
         String minCelsius = String.format("%.1f", task.getMinimal() - 273.15);
         String maxCelsius = String.format("%.1f", task.getMaximal() - 273.15);

@@ -1,8 +1,11 @@
 package Controller;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.appsmontreal.weather.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -13,10 +16,17 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class DownloadTask extends AsyncTask<String,Void,String> {
+
+    Context context;
+
     public Double temperature;
     public Double maximal;
     public Double minimal;
     public int humidity;
+
+    public DownloadTask(Context context) {
+        this.context = context;
+    }
 
     public Double getTemperature() {
         return temperature;
@@ -83,6 +93,7 @@ public class DownloadTask extends AsyncTask<String,Void,String> {
             humidity = (int) jsonObject1.getInt("humidity");
             Log.i("humidity======", String.valueOf(humidity));
 
+            ((MainActivity)context).convertToCelsius();
 
         } catch (Exception e) {
             e.printStackTrace();
