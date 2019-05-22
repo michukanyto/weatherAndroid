@@ -1,5 +1,6 @@
 package com.appsmontreal.weather;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -93,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String minFahrenheit = String.format("%.1f", ((task.getMinimal() - 273) * (9/5)) + 32);
         String maxFahrenheit = String.format("%.1f", ((task.getMaximal() - 273) * (9/5)) + 32);
         setAndPrintResult(tempFahrenheit,minFahrenheit,maxFahrenheit);
+        buttons[2].setTextColor(Color.WHITE);
+        buttons[1].setTextColor(Color.BLACK);
     }
 
     private void convertToCelsius() {
@@ -100,6 +103,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String minCelsius = String.format("%.1f", task.getMinimal() - 273.15);
         String maxCelsius = String.format("%.1f", task.getMaximal() - 273.15);
         setAndPrintResult(tempCelsius,minCelsius,maxCelsius);
+        buttons[1].setTextColor(Color.WHITE);
+        buttons[2].setTextColor(Color.BLACK);
     }
 
     private void setAndPrintResult(String temp, String min, String max) {
