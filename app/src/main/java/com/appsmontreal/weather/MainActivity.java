@@ -89,23 +89,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //    ° F = 9/5 (K - 273) + 32
     private void convertToFahrenheit() {
-        String tempFahrenheit = String.valueOf(((9/5) * (task.getTemperature() - 273)) + 32);
-        String minFahrenheit = String.valueOf(((9/5) * (task.getMinimal() - 273)) + 32);
-        String maxFahrenheit = String.valueOf(((9/5) * (task.getMaximal() - 273)) + 32);
+        String tempFahrenheit = String.format("%.1f", ((task.getTemperature() - 273) * (9/5)) + 32);
+        String minFahrenheit = String.format("%.1f", ((task.getMinimal() - 273) * (9/5)) + 32);
+        String maxFahrenheit = String.format("%.1f", ((task.getMaximal() - 273) * (9/5)) + 32);
         setAndPrintResult(tempFahrenheit,minFahrenheit,maxFahrenheit);
     }
 
     private void convertToCelsius() {
-        String tempCelsius = String.valueOf(task.getTemperature() - 273.15);
-        String minCelsius = String.valueOf(task.getMinimal() - 273.15);
-        String maxCelsius = String.valueOf(task.getMaximal() - 273.15);
+        String tempCelsius = String.format("%.1f", task.getTemperature() - 273.15);
+        String minCelsius = String.format("%.1f", task.getMinimal() - 273.15);
+        String maxCelsius = String.format("%.1f", task.getMaximal() - 273.15);
         setAndPrintResult(tempCelsius,minCelsius,maxCelsius);
     }
 
     private void setAndPrintResult(String temp, String min, String max) {
-        temperatureTextView.setText(String.format("%.1f",temp));
-        minTextView.setText(String.format("%.1f",min));
-        maxTextView.setText(String.format("%.1f",max));
+        temperatureTextView.setText(temp);
+        minTextView.setText(min);
+        maxTextView.setText(max);
         humidityTextView.setText(String.valueOf(task.getHumidity()));
 
     }
